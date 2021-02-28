@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "159770130003",
+    "project_id": "bills-db3ae",
+    "storage_bucket": "bills-db3ae.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:159770130003:android:26ba7166be4e30dd88b8a6",
+        "android_client_info": {
+          "package_name": "com.example.anbu_stores_bills"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "159770130003-0lb8fpbhp08ddfc4189snqk7pk5pk8k5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYnJ4vHcOQAS1pAmYkzvtKnFks545FZgg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "159770130003-0lb8fpbhp08ddfc4189snqk7pk5pk8k5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
