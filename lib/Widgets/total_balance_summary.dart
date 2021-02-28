@@ -1,5 +1,7 @@
+import 'package:anbu_stores_bills/Store/CustomerStore.dart';
 import 'package:anbu_stores_bills/util/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class TotalBalanceSummary extends StatelessWidget {
   @override
@@ -32,11 +34,13 @@ class TotalBalanceSummary extends StatelessWidget {
                               ),
                         ),
                         Spacer(),
-                        Text("₹ 5000",style: Theme.of(context).textTheme.title.copyWith(
-                          fontWeight: FontWeight.w700,
-                          fontFamily: "Heebo",
-                          color: Theme.of(context).accentColor
-                        ),)
+                        Consumer<CustomerStore>(
+                          builder:(_,store,__) => Text("₹ ${store.total}",style: Theme.of(context).textTheme.title.copyWith(
+                            fontWeight: FontWeight.w700,
+                            fontFamily: "Heebo",
+                            color: Theme.of(context).accentColor
+                          ),),
+                        )
                       ],
                     ),
                   )))

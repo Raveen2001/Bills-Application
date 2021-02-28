@@ -21,27 +21,19 @@ class _AllCustomersState extends State<AllCustomers> {
   void didChangeDependencies() async {
     if (isFirst) {
       customerStore = Provider.of<CustomerStore>(context, listen: true);
-      // customerStore.fetchCustomers();
-
-
+      customerStore.fetchCustomers();
       isFirst = false;
     }
-
-    // TODO: implement didChangeDependencies
     super.didChangeDependencies();
   }
 
   @override
   Widget build(BuildContext context) {
-    // CustomerStore cs= context.watch<CustomerStore>();
     customers = customerStore.getCustomers;
     print(customers);
     print("Notified");
-    // setState(() {
-    //   customers=.customers;
-    // });
 
-    return Container(
+    return customerStore.isLoading? Center(child: CircularProgressIndicator(),):Container(
       margin: const EdgeInsets.all(5),
       width: double.infinity,
       color: Colors.white,
@@ -58,7 +50,7 @@ class _AllCustomersState extends State<AllCustomers> {
                       onPressed: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                              builder: (context) => CustomerDetailsScreen()),
+                              builder: (context) => CustomerDetailsScreen(customer: customers[index])),
                         );
                       },
                       padding: const EdgeInsets.all(0),
@@ -79,7 +71,7 @@ class _AllCustomersState extends State<AllCustomers> {
                                 .textTheme
                                 .headline1
                                 .copyWith(
-                                    fontSize: 20, fontWeight: FontWeight.w700)),
+                                    fontSize: 16, fontWeight: FontWeight.w600)),
                       ),
                     ),
                     Divider(

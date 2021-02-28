@@ -1,6 +1,7 @@
 import 'package:anbu_stores_bills/Screens/add_customer.dart';
 import 'file:///E:/Anbu%20Stores/anbu_stores_bills/lib/Widgets/main_screen_body.dart';
 import 'package:anbu_stores_bills/Store/CustomerStore.dart';
+import 'package:anbu_stores_bills/Store/TransactionStore.dart';
 import 'package:anbu_stores_bills/util/utils.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (ctx)=> CustomerStore()),
+        ChangeNotifierProvider(create: (ctx)=> TransactionStore()),
       ],
       child: MaterialApp(
         title: 'Anbu Stores Bills',

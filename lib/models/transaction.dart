@@ -1,19 +1,19 @@
 import 'package:flutter/cupertino.dart';
 
-class Transaction{
+class TransactionData{
   DateTime date;
-  int amount;
+  int amount, balance;
   bool isAdd;
-  Transaction({@required this.date, @required this.amount, @required this.isAdd});
+  TransactionData({@required this.date, @required this.amount, @required this.balance, @required this.isAdd});
 }
 
 
-List<Transaction> transactions = [
-  Transaction(date: DateTime.now(), amount: 500, isAdd: true),
-  Transaction(date: DateTime.now(), amount: 500, isAdd: false),
-  Transaction(date: DateTime.now(), amount: 500, isAdd: true),
-  Transaction(date: DateTime.now(), amount: 500, isAdd: true),
-  Transaction(date: DateTime.now(), amount: 500, isAdd: false),
-  Transaction(date: DateTime.now(), amount: 500, isAdd: false),
-  Transaction(date: DateTime.now(), amount: 500, isAdd: true),
-];
+// List<TransactionData> transactions = [
+//   TransactionData(date: DateTime.now(), amount: 500, isAdd: true),
+//   TransactionData(date: DateTime.now(), amount: 500, isAdd: false),
+//   TransactionData(date: DateTime.now(), amount: 500, isAdd: true),
+//   TransactionData(date: DateTime.now(), amount: 500, isAdd: true),
+//   TransactionData(date: DateTime.now(), amount: 500, isAdd: false),
+//   TransactionData(date: DateTime.now(), amount: 500, isAdd: false),
+//   TransactionData(date: DateTime.now(), amount: 500, isAdd: true),
+// ];

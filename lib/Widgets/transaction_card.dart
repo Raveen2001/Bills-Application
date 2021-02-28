@@ -3,7 +3,7 @@ import 'package:anbu_stores_bills/util/utils.dart';
 import 'package:flutter/material.dart';
 
 class TransactionCard extends StatelessWidget {
-  final Transaction transaction;
+  final TransactionData transaction;
   TransactionCard({@required this.transaction});
   @override
   Widget build(BuildContext context) {
@@ -18,12 +18,12 @@ class TransactionCard extends StatelessWidget {
             Card(
               margin: EdgeInsets.only(top: 5),
               color: Theme.of(context).accentColor.withOpacity(0.4),
-              child: Container( padding: const EdgeInsets.all(5),child: Text("Bal. ₹ ${transaction.amount}")),
+              child: Container( padding: const EdgeInsets.all(5),child: Text("Bal. ₹ ${transaction.balance}")),
             ),
             Spacer()
           ],
         ),
-        trailing: Text("₹ 400", style: TextStyle(color: transaction.isAdd?Colors.green:Colors.red, fontSize: 18, fontWeight: FontWeight.w700),),
+        trailing: Text("₹ ${transaction.amount}", style: TextStyle(color: transaction.isAdd?Colors.green:Colors.red, fontSize: 18, fontWeight: FontWeight.w700),),
       ),
     );
   }

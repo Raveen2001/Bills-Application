@@ -7,17 +7,21 @@ import 'package:flutter/cupertino.dart';
 
 class CustomerStore with ChangeNotifier{
   List<Customer> customers;
-  bool isSorted = true;
+  int total;
+  bool isSorted, isLoading;
 
   CustomerStore(){
     print("constructor called");
+    total = 0;
+    isSorted = false;
+    isLoading = true;
     customers = [];
     fetchCustomers();
   }
 
   List<Customer> get getCustomers{
     print("getting data");
-    customers.forEach((element) {print(element.balance);});
+    // customers.forEach((element) {print(element.balance);});
     return customers;
   }
 
@@ -53,29 +57,18 @@ class CustomerStore with ChangeNotifier{
 
   void fetchCustomers(){
     print("Fetching data");
+    total = 0;
     customers = [];
-    FirebaseFirestore.instance.collection("customers").snapshots().listen((event) {
+    FirebaseFirestore.instance.collection("customers").orderBy("balance", descending: true).snapshots().listen((event) {
       customers = [];
       event.docs.forEach((element) {
-        print(element.id);
+        total += element['balance'];
         customers.add(Customer(id: element.id, name: element['name'], phNo: element['phNo'], balance: element['balance']));
-        print("here" + customers.toString());
       });
+      isLoading = false;
       notifyListeners();
+      print("fetch notify");
     });
 
-    // print(customers);
-
-    // await FirebaseFirestore.instance.collection('customers').get().then((data) {
-    //   data.docs.forEach((element) {
-    //     print(element.id);
-    //     customers.add(Customer(id: element.id, name: element['name'], phNo: element['phNo'], balance: element['balance']));
-    //   });
-    // });
-  }
-  void setCustomers(List<Customer> customers){
-    this.customers = customers;
-    this.customers.forEach((element) { print("setting " + element.balance.toString());});
-    notifyListeners();
   }
 }
