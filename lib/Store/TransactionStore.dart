@@ -1,3 +1,4 @@
+import 'package:anbu_stores_bills/models/Customer.dart';
 import 'package:anbu_stores_bills/models/transaction.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -5,10 +6,11 @@ import 'package:flutter/material.dart';
 class TransactionStore with ChangeNotifier{
   String customerId;
   List<TransactionData> transactions;
-  bool isLoading;
+  bool isLoading, isUploading;
   TransactionStore(){
     transactions = [];
     isLoading = true;
+    isUploading = false;
   }
 
   List<TransactionData> get getTransactions{
@@ -20,7 +22,7 @@ class TransactionStore with ChangeNotifier{
     DateTime date;
     customerId = id;
     transactions = [];
-    FirebaseFirestore.instance.collection("customers/$customerId/transactions").snapshots().listen((event) {
+    FirebaseFirestore.instance.collection("customers/$customerId/transactions").orderBy('date', descending: true).snapshots().listen((event) {
       transactions = [];
       event.docs.forEach((element) {
         date = element['date'].toDate();
@@ -33,4 +35,18 @@ class TransactionStore with ChangeNotifier{
       notifyListeners();
     });
   }
+  
+  void addTransaction(int balance, int amount, bool isAdd){
+    isUploading = true;
+    notifyListeners();
+    FirebaseFirestore.instance.collection("customers/$customerId/transactions").add(
+        {
+          'date': DateTime.now(),
+          'amount': amount,
+          'balance': balance,
+          'isAdd': isAdd
+        }).then((value) => print(value.id));
+  }
+
+
 }

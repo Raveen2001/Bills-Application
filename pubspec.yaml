@@ -33,6 +33,8 @@ dependencies:
   cloud_firestore: ^0.16.0+1
   firebase_core: ^0.7.0
   provider: ^4.3.3
+  firebase_auth: ^0.20.1
+  form_field_validator: ^1.0.1
 
 dev_dependencies:
   flutter_test:
@@ -73,6 +75,9 @@ flutter:
           weight: 500
         - asset: assets/fonts/Heebo-Bold.ttf
           weight: 700
+    - family: RussoOne
+      fonts:
+        - asset: assets/fonts/RussoOne-Regular.ttf
 
 
   # For details regarding fonts from package dependencies,

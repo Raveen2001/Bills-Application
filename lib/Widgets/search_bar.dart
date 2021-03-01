@@ -17,7 +17,7 @@ class _SearchBarState extends State<SearchBar> {
   void didChangeDependencies() {
     if(isFirst){
       print("building");
-      customerStore = Provider.of<CustomerStore>(context);
+      customerStore = Provider.of<CustomerStore>(context, listen: false);
       isFirst = false;
     }
     super.didChangeDependencies();
@@ -36,6 +36,7 @@ class _SearchBarState extends State<SearchBar> {
               child: TextField(
                 onChanged: (value) {
                   print(value);
+                  customerStore.searchCustomer(value);
                 },
                 style: TextStyle(
                   fontSize: 15,

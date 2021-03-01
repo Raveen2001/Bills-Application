@@ -24,6 +24,7 @@ class _CustomerDetailsScreenState extends State<CustomerDetailsScreen> {
 
   bool isFirst = true;
   TransactionStore transactionStore;
+  final key = GlobalKey<ScaffoldState>();
 
 
   @override
@@ -40,22 +41,16 @@ class _CustomerDetailsScreenState extends State<CustomerDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     final List<TransactionData> transactions = transactionStore.getTransactions;
-    final _controller = ScrollController();
-    if(transactions.isNotEmpty){
-      Timer(
-        Duration(microseconds: 100),
-            () => _controller.jumpTo(_controller.position.maxScrollExtent),
-      );
-    }
 
     return Scaffold(
+      key: key,
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: buildAppBar(context),
       body: transactionStore.isLoading? Center(child: CircularProgressIndicator(),):Column(
         children: [
-          CustomerBalanceSummary(),
-          Expanded(child: ListView.builder(
-            controller: _controller,
+          CustomerBalanceSummary(widget.customer.id),
+          transactions.isEmpty? Expanded(child: Center(child: CircularProgressIndicator(),)): Expanded(child: ListView.builder(
+            // controller: _controller,
             itemBuilder: (cxt, index){
             return TransactionCard(transaction: transactions[index],);
           },
@@ -73,7 +68,7 @@ class _CustomerDetailsScreenState extends State<CustomerDetailsScreen> {
                     Expanded(
                       child: FlatButton(
                           onPressed: () {
-                            showDialog(context: context, builder: (_) => MinusDialog());
+                            showDialog(context: context, builder: (_) => MinusDialog(widget.customer));
                           },
                           color: Colors.redAccent[700],
                           child: Container(
@@ -92,7 +87,7 @@ class _CustomerDetailsScreenState extends State<CustomerDetailsScreen> {
                     Expanded(
                       child: FlatButton(
                           onPressed: () {
-                            showDialog(context: context, builder: (_) => AddDialog());
+                            showDialog(context: context, builder: (_) => AddDialog(widget.customer));
                           },
                           color: Theme.of(context).accentColor,
                           padding: const EdgeInsets.all(0),

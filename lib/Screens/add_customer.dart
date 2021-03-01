@@ -1,5 +1,8 @@
+import 'package:anbu_stores_bills/Store/CustomerStore.dart';
+import 'package:anbu_stores_bills/util/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 
 class AddCustomer extends StatefulWidget {
   @override
@@ -8,15 +11,24 @@ class AddCustomer extends StatefulWidget {
 
 class _AddCustomerState extends State<AddCustomer> {
   final formKey = GlobalKey<FormState>();
+  final key = GlobalKey<ScaffoldState>();
+
   final nameFocus = FocusNode(),
       phoneFocus = FocusNode(),
       balanceFocus = FocusNode();
   String name;
   int phone, balance;
+  bool isFirst = true;
+  CustomerStore customerStore;
 
   @override
   Widget build(BuildContext context) {
+    if(isFirst){
+      customerStore = Provider.of(context);
+      isFirst = false;
+    }
     return Scaffold(
+      key: key,
       appBar: AppBar(
         title: Text("Add Customer"),
       ),
@@ -24,8 +36,7 @@ class _AddCustomerState extends State<AddCustomer> {
         padding: const EdgeInsets.all(10.0),
         child: Form(
           key: formKey,
-          // autovalidate: true,
-          autovalidateMode: AutovalidateMode.onUserInteraction,
+          // autovalidateMode: AutovalidateMode.onUserInteraction,
           child: Column(
             children: [
               TextFormField(
@@ -34,8 +45,12 @@ class _AddCustomerState extends State<AddCustomer> {
                   name = value;
                 },
                 validator: (value) {
-                  if (value.length > 3) return null;
+                  if (value.length > 2) return null;
                   return "Enter atleast 3 characters";
+                },
+                textInputAction: TextInputAction.next,
+                onFieldSubmitted: (_){
+                  Focus.of(context).requestFocus(phoneFocus);
                 },
                 style: TextStyle(
                   fontSize: 15,
@@ -65,6 +80,10 @@ class _AddCustomerState extends State<AddCustomer> {
                   }
                 },
                 focusNode: phoneFocus,
+                textInputAction: TextInputAction.next,
+                onFieldSubmitted: (_){
+                  Focus.of(context).requestFocus(balanceFocus);
+                },
                 maxLength: 10,
                 style: TextStyle(
                   fontSize: 15,
@@ -87,6 +106,10 @@ class _AddCustomerState extends State<AddCustomer> {
                   balance = int.parse(value);
                 },
                 focusNode: balanceFocus,
+                textInputAction: TextInputAction.done,
+                onFieldSubmitted: (_){
+                  submitForm();
+                },
                 validator: (value) {
                   try {
                     final val = int.parse(value);
@@ -123,8 +146,9 @@ class _AddCustomerState extends State<AddCustomer> {
   void submitForm() {
     if (formKey.currentState.validate()) {
       formKey.currentState.save();
-      print(name + phone.toString() + balance.toString());
-      //TODO server request
+      Navigator.of(context).pop();
+      customerStore.addCustomers(Utils.capitalize(name).trim(), phone, balance);
+
     }
   }
 }

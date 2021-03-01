@@ -1,6 +1,12 @@
+import 'package:anbu_stores_bills/Store/CustomerStore.dart';
+import 'package:anbu_stores_bills/Store/TransactionStore.dart';
+import 'package:anbu_stores_bills/models/Customer.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class MinusDialog extends StatefulWidget {
+  final Customer customer;
+  MinusDialog(this.customer);
   @override
   _MinusDialogState createState() => _MinusDialogState();
 }
@@ -9,9 +15,17 @@ class _MinusDialogState extends State<MinusDialog> {
 
 
   int amount;
+  bool isFirst = true;
+  TransactionStore transactionStore;
+  CustomerStore customerStore;
 
   @override
   Widget build(BuildContext context) {
+    if(isFirst){
+      transactionStore = Provider.of(context);
+      customerStore = Provider.of(context);
+      isFirst = false;
+    }
     final formKey = GlobalKey<FormState>();
     return Dialog(
       child: Column(
@@ -53,7 +67,7 @@ class _MinusDialogState extends State<MinusDialog> {
               cursorColor: Colors.red,
               maxLines: 1,
               decoration: InputDecoration(
-                  labelText: "Name",
+                  labelText: "Amount",
                   labelStyle: TextStyle(color: Colors.redAccent),
                   border: OutlineInputBorder(),
                   focusedBorder: OutlineInputBorder(
@@ -71,7 +85,9 @@ class _MinusDialogState extends State<MinusDialog> {
               FlatButton(onPressed: (){
                 if(formKey.currentState.validate()){
                   formKey.currentState.save();
-                  print(amount);
+                  final balance = customerStore.getBalance(widget.customer.id) - amount;
+                  transactionStore.addTransaction(balance, amount, false);
+                  customerStore.updateBalance(widget.customer.id, balance);
                   Navigator.pop(context);
                 }
               }, child: Text("Subtract"),textColor: Colors.green,)

@@ -33,7 +33,7 @@ class _AllCustomersState extends State<AllCustomers> {
     print(customers);
     print("Notified");
 
-    return customerStore.isLoading? Center(child: CircularProgressIndicator(),):Container(
+    return customerStore.isLoading ? Center(child: CircularProgressIndicator(),) : Container(
       margin: const EdgeInsets.all(5),
       width: double.infinity,
       color: Colors.white,
