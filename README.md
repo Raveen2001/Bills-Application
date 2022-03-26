@@ -5,6 +5,7 @@
   - used Firebase as a backend for this application.
 
 <div style="display:flex>
+  <img src="screenshots/1.png" width="250" alt="screenshot">
  <img src="screenshots/1.png" width="250" alt="screenshot">
  <img src="screenshots/2.png" width="250" alt="screenshot">
  <img src="screenshots/3.png" width="250" alt="screenshot">
