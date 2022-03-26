@@ -28,18 +28,23 @@ class TotalBalanceSummary extends StatelessWidget {
                       children: [
                         Text(
                           "Total Balance : ",
-                          style: Theme.of(context).textTheme.title.copyWith(
+                          style: Theme.of(context).textTheme.headline6.copyWith(
                                 fontWeight: FontWeight.w700,
                                 fontFamily: "Heebo",
                               ),
                         ),
                         Spacer(),
                         Consumer<CustomerStore>(
-                          builder:(_,store,__) => Text("₹ ${store.total}",style: Theme.of(context).textTheme.title.copyWith(
-                            fontWeight: FontWeight.w700,
-                            fontFamily: "Heebo",
-                            color: Theme.of(context).accentColor
-                          ),),
+                          builder: (_, store, __) => Text(
+                            "₹ ${store.total}",
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline6
+                                .copyWith(
+                                    fontWeight: FontWeight.w700,
+                                    fontFamily: "Heebo",
+                                    color: Theme.of(context).accentColor),
+                          ),
                         )
                       ],
                     ),

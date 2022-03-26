@@ -34,9 +34,8 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             // primarySwatch: Colors.green,
             primaryColor: Color.fromRGBO(44, 163, 97, 1),
-            accentColor: Color.fromRGBO(61, 218, 132, 1),
-            textTheme: Theme
-                .of(context)
+            primarySwatch: Colors.green,
+            textTheme: Theme.of(context)
                 .textTheme
                 .apply(displayColor: Color.fromRGBO(47, 47, 47, 1)),
             fontFamily: "Heebo",
@@ -48,21 +47,19 @@ class MyApp extends StatelessWidget {
             stream: _auth(),
             builder: (cxt, snapshots) {
               Utils(cxt);
-            if (snapshots.hasData) {
-              return MyHomePage(title: 'Anbu Stores Bills');
-            }else{
-              return LoginPage();
-            }
-          },
+              if (snapshots.hasData) {
+                return MyHomePage(title: 'Anbu Stores Bills');
+              } else {
+                return LoginPage();
+              }
+            },
           )
-        // home: AddCustomer()
-      ),
+          // home: AddCustomer()
+          ),
     );
   }
 
-  Stream _auth(){
+  Stream _auth() {
     return FirebaseAuth.instance.authStateChanges();
   }
 }
-
-

@@ -31,16 +31,16 @@ class CustomerBalanceSummary extends StatelessWidget {
                   children: [
                     Text(
                       "Total Balance : ",
-                      style: Theme.of(context).textTheme.title.copyWith(
+                      style: Theme.of(context).textTheme.headline6.copyWith(
                             fontWeight: FontWeight.w700,
                             fontFamily: "Heebo",
                           ),
                     ),
                     Spacer(),
                     Consumer<CustomerStore>(
-                      builder: (_, store, __ ) =>Text(
+                      builder: (_, store, __) => Text(
                         "₹ ${store.getBalance(id)}",
-                        style: Theme.of(context).textTheme.title.copyWith(
+                        style: Theme.of(context).textTheme.headline6.copyWith(
                             fontWeight: FontWeight.w700,
                             fontFamily: "Heebo",
                             color: Theme.of(context).accentColor),
