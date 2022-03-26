@@ -1,20 +1,17 @@
-<<<<<<< HEAD
+
 # Bills-Application
-=======
-# anbu_stores_bills
 
-A new Flutter application.
+  - A flutter mobile application that keeps a digital log of the transactions made in a shop.
+  - used Firebase as a backend for this application.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
->>>>>>> master
+<div style="display:flex>
+ <img src="screenshots/1.png" width="250" alt="screenshot">
+ <img src="screenshots/2.png" width="250" alt="screenshot">
+ <img src="screenshots/3.png" width="250" alt="screenshot">
+ <img src="screenshots/4.png" width="250" alt="screenshot">
+ <img src="screenshots/5.png" width="250" alt="screenshot">
+ <img src="screenshots/6.png" width="250" alt="screenshot">
+ <img src="screenshots/7.png" width="250" alt="screenshot">
+ <img src="screenshots/8.png" width="250" alt="screenshot">
+ <img src="screenshots/9.png" width="250" alt="screenshot">
+</div>
